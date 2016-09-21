@@ -22,16 +22,14 @@ class ReadFile(File):
     # words in the aim file
     def get_token_counts(self, tokens):
         lines = self.get_lines()
-        token_counts = {}
-        for t in tokens:
-            token_counts[t] = 0
-            
+        token_counts = [0 for i in range(len(tokens))]
+
         for line in lines:
             wordsInFile = line.strip().split()
             for i in range(0, len(wordsInFile)):
                 alphas = re.sub("[^a-zA-Z]","", wordsInFile[i])
-                if alphas in token_counts:
-                    token_counts[alphas] += 1
+                if alphas in tokens:
+                    token_counts[tokens.index(alphas)] += 1
         return token_counts
 
 
