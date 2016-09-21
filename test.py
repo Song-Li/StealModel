@@ -1,4 +1,4 @@
-from File import readFile
+from file_base import ReadFile
 
 r = readFile("try")
 counts = r.getTokenCounts("terrier-stop.txt", "\r\n")

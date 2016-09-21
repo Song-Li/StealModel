@@ -4,40 +4,35 @@ class File:
         self.path = fileName
         self.rfs = open(self.path, 'r')
 
-class readFile(File):
+class ReadFile(File):
     def __init__(self, fileName):
         File.__init__(self, fileName)
+
+    def set_path(self, path):
+        self.path = path
     
-    def getRaw(self):
+    def get_raw(self):
         return self.rfs.read();
     
-    def getLines(self):
+    def get_lines(self):
         #return self.rfs.readlines()
-        return self.rfs.read().split('\n')
-    
+        return self.rfs.readlines()
+
     # take in the tokenFile, the separator and count the number of
     # words in the aim file
-    def getTokenCounts(self, tokenFile, separator):
-        try:
-            t = open(tokenFile, 'r')
-        except:
-            print ("Token file open failed\n")
-        
-        tokens = t.read().strip().split(separator)
-        lines = self.getLines()
-        tokenCounts = {}
+    def get_token_counts(self, tokens):
+        lines = self.get_lines()
+        token_counts = {}
         for t in tokens:
-            tokenCounts[t] = 0
+            token_counts[t] = 0
             
         for line in lines:
-            if line == None:
-                continue
             wordsInFile = line.strip().split()
             for i in range(0, len(wordsInFile)):
                 alphas = re.sub("[^a-zA-Z]","", wordsInFile[i])
-                if alphas in tokenCounts:
-                    tokenCounts[alphas] += 1
-        return tokenCounts
+                if alphas in token_counts:
+                    token_counts[alphas] += 1
+        return token_counts
 
 
       
